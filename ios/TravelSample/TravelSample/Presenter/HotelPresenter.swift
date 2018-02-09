@@ -162,6 +162,7 @@ extension HotelPresenter {
         }
         do {
             
+            // # tag::query-hotels[]
             // Do a JOIN Query to fetch bookmark document and for every hotel Id listed
             // in the "hotels" property, fetch the corresponding hotel document
             var bookmarkedHotels:Hotels = Hotels()
@@ -181,7 +182,11 @@ extension HotelPresenter {
             let bookmarkAllColumns = _SelectColumn.ALLRESULT.from("bookmarkDS")
             let hotelsAllColumns = _SelectColumn.ALLRESULT.from("hotelsDS")
             
-            let query = Query.select(bookmarkAllColumns, hotelsAllColumns).from(bookmarkDS).join(join).where(typeExpr.equalTo("bookmarkedhotels"));
+            let query = Query.select(bookmarkAllColumns, hotelsAllColumns)
+            .from(bookmarkDS)
+            .join(join)
+            .where(typeExpr.equalTo("bookmarkedhotels"));
+            // # end::query-hotels[]
             
            // print (try? query.explain())
             for result in try query.execute() {
